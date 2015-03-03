@@ -1,7 +1,8 @@
 class JobtodosController < ApplicationController
-
+  before_filter :authenticate
+  
   def index
-    @jobtodos = Jobtodo.all
+    @jobtodos = Jobtodo.where(email: session[:current_email])
   end
   
   def new
@@ -9,7 +10,7 @@ class JobtodosController < ApplicationController
   end
 
   def create
-  	@jobtodo = Jobtodo.new(todo_params)
+  	@jobtodo = Jobtodo.new(todo_params.merge( email: session[:current_email]))
     if @jobtodo.save
       redirect_to jobtodos_path
     else
@@ -18,7 +19,7 @@ class JobtodosController < ApplicationController
   end
 
   private
-   def todo_params
-   	 params.require(:jobtodo).permit(:title)
-   end
+  def todo_params
+   	params.require(:jobtodo).permit(:title)
+  end
 end

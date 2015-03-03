@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature "User create todos" do 
 	scenario "successfuly" do
-		visit root_path
-		click_on "Add a new todo"
+	  sign_in
+	  click_on "Add a new todo"
 	  fill_in "Title", with: "Make it done" 
 	  click_on "Submit" 
     
