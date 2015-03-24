@@ -3,7 +3,7 @@ class JobtodosController < ApplicationController
   before_filter :authenticate
   
   def index
-    @jobtodos = Jobtodo.where(email: current_email)
+    @jobtodos = current_user.jobtodos
   end
   
   def new
@@ -12,12 +12,8 @@ class JobtodosController < ApplicationController
  
   
   def create
-  	@jobtodo = Jobtodo.new(todo_params.merge( email: current_email))
-    if @jobtodo.save
-      redirect_to jobtodos_path
-    else
-    	render 'new'
-    end
+  	current_user.jobtodos.create(todo_params)
+    redirect_to jobtodos_path
   end
 
   private
