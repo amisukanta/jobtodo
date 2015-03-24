@@ -3,7 +3,7 @@ class JobtodosController < ApplicationController
   before_filter :authenticate
   
   def index
-    @jobtodos = current_user.jobtodos
+   @jobtodos = current_user.jobtodos
   end
   
   def new
@@ -17,7 +17,7 @@ class JobtodosController < ApplicationController
   end
 
   private
-    def todo_params
-      params.require(:jobtodo).permit(:title)
-    end
+   def todo_params
+    params.require(:jobtodo).permit(:title)
+   end
 end
