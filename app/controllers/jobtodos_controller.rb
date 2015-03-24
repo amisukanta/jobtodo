@@ -7,12 +7,12 @@ class JobtodosController < ApplicationController
   end
   
   def new
-  	@jobtodo = Jobtodo.new
+   @jobtodo = Jobtodo.new
   end
  
   
   def create
-  	current_user.jobtodos.create(todo_params)
+   current_user.jobtodos.create(todo_params)
     redirect_to jobtodos_path
   end
 
